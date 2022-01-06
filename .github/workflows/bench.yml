@@ -5,6 +5,8 @@ on:
 jobs: 
   nhttp:
     runs-on: ubuntu-latest
+    output: 
+      result: '${{ steps.result.output.result }}'
     steps:
       - name: Checkout Repository
         uses: actions/checkout@master
@@ -19,9 +21,15 @@ jobs:
       - name: Start Bench
         run: deno run -A bench.ts nhttp
       - name: End Bench
-        run: echo "End Bench"
+        id: result
+        run: | 
+          RESULT="frameworks/nhttp/result.json"
+          echo "::set-output name=result::$RESULT"
+
   oak:
     runs-on: ubuntu-latest
+    output: 
+      result: '${{ steps.result.output.result }}'
     steps:
       - name: Checkout Repository
         uses: actions/checkout@master
@@ -36,10 +44,13 @@ jobs:
       - name: Start Bench
         run: deno run -A bench.ts oak
       - name: End Bench
-        run: echo "End Bench"
+        id: result
+        run: | 
+          RESULT="frameworks/oak/result.json"
+          echo "::set-output name=result::$RESULT"
   results: 
     runs-on: ubuntu-latest
-    needs:
+    inc:
       - nhttp
       - oak
     steps:
@@ -48,6 +59,10 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
+      - name: Result nhttp
+        run: echo '${{inc.nhttp.output.result}}'
+      - name: Result oak
+        run: echo '${{inc.oak.output.result}}'
       - name: Setup deno latest
         uses: denoland/setup-deno@main
       - name: Readme
