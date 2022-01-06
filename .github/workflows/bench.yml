@@ -6,6 +6,7 @@ jobs:
   nhttp:
     runs-on: ubuntu-latest
     outputs: 
+      result_path: '${{ steps.result.outputs.result_path }}'
       result: '${{ steps.result.outputs.result }}'
     steps:
       - name: Checkout Repository
@@ -23,12 +24,15 @@ jobs:
       - name: End Bench
         id: result
         run: | 
-          RESULT="frameworks/nhttp/result.json"
+          RESULT_PATH="frameworks/nhttp/result.json"
+          RESULT="$(cat frameworks/nhttp/result.json)"
+          echo "::set-output name=result_path::$RESULT_PATH"
           echo "::set-output name=result::$RESULT"
 
   oak:
     runs-on: ubuntu-latest
     outputs: 
+      result_path: '${{ steps.result.outputs.result_path }}'
       result: '${{ steps.result.outputs.result }}'
     steps:
       - name: Checkout Repository
@@ -46,7 +50,9 @@ jobs:
       - name: End Bench
         id: result
         run: | 
-          RESULT="frameworks/oak/result.json"
+          RESULT_PATH="frameworks/oak/result.json"
+          RESULT="$(cat frameworks/oak/result.json)"
+          echo "::set-output name=result_path::$RESULT_PATH"
           echo "::set-output name=result::$RESULT"
   results: 
     runs-on: ubuntu-latest
@@ -60,9 +66,13 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
       - name: Result nhttp
-        run: echo '${{needs.nhttp.outputs.result}}'
+        run: > 
+          echo '${{needs.nhttp.outputs.result}}' | jq . | tee
+          ${{needs.nhttp.outputs.result_path}}
       - name: Result oak
-        run: echo '${{needs.oak.outputs.result}}'
+        run: > 
+          echo '${{needs.oak.outputs.result}}' | jq . | tee
+          ${{needs.oak.outputs.result_path}}
       - name: Setup deno latest
         uses: denoland/setup-deno@main
       - name: Readme
