@@ -5,8 +5,8 @@ on:
 jobs: 
   nhttp:
     runs-on: ubuntu-latest
-    output: 
-      result: '${{ steps.result.output.result }}'
+    outputs: 
+      result: '${{ steps.result.outputs.result }}'
     steps:
       - name: Checkout Repository
         uses: actions/checkout@master
@@ -28,8 +28,8 @@ jobs:
 
   oak:
     runs-on: ubuntu-latest
-    output: 
-      result: '${{ steps.result.output.result }}'
+    outputs: 
+      result: '${{ steps.result.outputs.result }}'
     steps:
       - name: Checkout Repository
         uses: actions/checkout@master
@@ -50,7 +50,7 @@ jobs:
           echo "::set-output name=result::$RESULT"
   results: 
     runs-on: ubuntu-latest
-    inc:
+    needs:
       - nhttp
       - oak
     steps:
@@ -60,9 +60,9 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
       - name: Result nhttp
-        run: echo '${{inc.nhttp.output.result}}'
+        run: echo '${{needs.nhttp.outputs.result}}'
       - name: Result oak
-        run: echo '${{inc.oak.output.result}}'
+        run: echo '${{needs.oak.outputs.result}}'
       - name: Setup deno latest
         uses: denoland/setup-deno@main
       - name: Readme
