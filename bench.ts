@@ -16,9 +16,9 @@ try {
   console.log(`- Preparing ${info.name}. (wait...)`);
   await sleep(5);
   console.log(`- Warming up ${info.name}. (wait...)`);
-  await exec(`${CMD}autocannon -c 40 -d 10 http://localhost:8000`);
+  await exec(`${CMD}autocannon -c 100 -d 10 http://localhost:8000`);
   console.log(`- Running ${info.name}. (wait...)`);
-  const out = await exec(`${CMD}autocannon -c 40 -d 10 -j http://localhost:8000`);
+  const out = await exec(`${CMD}autocannon -c 100 -d 10 -j http://localhost:8000`);
   const result = JSON.parse(out);
   await Deno.writeTextFile(lookup + fw + '/result.json', JSON.stringify({
     "Frameworks": `[${info.name}](${info.link})`,
@@ -32,7 +32,6 @@ try {
   }));
   if (result.errors === 0) {
     console.log("Success bench", info.name);
-    console.log(result);
   } else {
     console.error("Failed bench", info.name);
   }

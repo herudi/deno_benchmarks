@@ -1,7 +1,7 @@
 ## Simple benchmark, Deno and other lang/runtime.
 This benchmark uses [autocannon](https://github.com/mcollina/autocannon).
 
-`autocannon -c 40 -d 30 http://localhost:8000` (two rounds. one to warm-up, one to measure).
+`autocannon -c 100 -d 10 http://localhost:8000` (two rounds. one to warm-up, one to measure).
 
 Example code for benchmark.
 ```ts
