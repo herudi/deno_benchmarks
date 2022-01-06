@@ -1,0 +1,8 @@
+{
+  "name": "deno_std",
+  "run": "deno run -A ./frameworks/deno_std/server.ts",
+  "lang": "Deno",
+  "link": "https://deno.land/std/http",
+  "version": "0.119.0",
+  "is_router": false
+}

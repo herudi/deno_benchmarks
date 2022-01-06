@@ -1,0 +1,8 @@
+{
+    "name": "golang",
+    "run": "go run ./frameworks/golang/server.go",
+    "lang": "Golang",
+    "link": "https://go.dev/",
+    "version": "1.17.5",
+    "is_router": true
+}

@@ -1,0 +1,8 @@
+{
+  "name": "nhttp",
+  "run": "deno run -A ./frameworks/nhttp/server.ts",
+  "lang": "Deno",
+  "link": "https://github.com/nhttp/nhttp",
+  "version": "1.1.5",
+  "is_router": true
+}
