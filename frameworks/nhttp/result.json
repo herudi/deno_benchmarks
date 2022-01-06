@@ -1,8 +1,8 @@
 {
   "Frameworks": "[nhttp](https://github.com/nhttp/nhttp)",
-  "Requests/sec": 21321.8,
-  "Latency": 1.5,
-  "Throughput/Mb": "2.83",
+  "Requests/sec": 42649.6,
+  "Latency": 2,
+  "Throughput/Mb": "5.65",
   "Version": "1.1.5",
   "Router?": true,
   "Lang/Runtime": "Deno",
