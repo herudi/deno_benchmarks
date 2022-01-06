@@ -15,7 +15,7 @@ jobs:
       - name: Setup deno latest
         uses: denoland/setup-deno@main
       - name: Install Autocannon
-        run: npm Install autocannon -g
+        run: npm install autocannon -g
       - name: Start Bench
         run: deno run -A bench.ts nhttp
       - name: End Bench
@@ -32,7 +32,7 @@ jobs:
       - name: Setup deno latest
         uses: denoland/setup-deno@main
       - name: Install Autocannon
-        run: npm Install autocannon -g
+        run: npm install autocannon -g
       - name: Start Bench
         run: deno run -A bench.ts oak
       - name: End Bench
