@@ -13,12 +13,12 @@ framework.get("/", (req, res) => {
 ```
 
 ## Output
-Created At : Fri Jan 07 2022, 6:25:56 AM
+Created At : Fri Jan 07 2022, 6:34:45 AM
 
 |Frameworks|Requests/sec|Latency|Throughput/Mb|Version|Router?|Lang/Runtime|Errors|
 |----|----|----|----|----|----|----|----|
-|[nhttp](https://github.com/nhttp/nhttp)|37186.4|2.14|4.93|1.1.5|true|Deno|0|
-|[deno_std](https://deno.land/std/http)|24161.6|3.67|3.20|0.119.0|false|Deno|0|
+|[deno_std](https://deno.land/std/http)|40624.81|1.8|5.39|0.119.0|false|Deno|0|
+|[nhttp](https://github.com/nhttp/nhttp)|36602.4|2.25|4.85|1.1.5|true|Deno|0|
 
 
 ## Usage
