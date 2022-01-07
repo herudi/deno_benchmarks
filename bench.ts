@@ -17,7 +17,7 @@ async function bench(info: Record<string, any>) {
     // update deps 20s
     await sleep(20);
     console.log(`- Running ${info.name}. (wait...)`);
-    const out = await exec(`${CMD}wrk -t10 -c100 -d30s http://localhost:8000`);
+    const out = await exec(`${CMD}wrk -t2 -c40 -d10s http://localhost:8000`);
     const result = parseWrk(
       `
         ${out}

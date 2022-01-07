@@ -1,7 +1,7 @@
 ## Simple deno benchmark.
 This benchmark uses [wrk](https://github.com/wg/wrk).
 
-`wrk -t10 -c100 -d30s http://localhost:8000`
+`wrk -t2 -c40 -d10s http://localhost:8000`
 
 > Inspired by [bench](https://github.com/denosaurs/bench).
 
