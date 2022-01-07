@@ -20,17 +20,25 @@ framework.get("/", (req, res) => {
 git clone https://github.com/herudi/deno_benchmark.git
 cd deno_benchmark
 
-// for all
+// for_all
 deno run -A bench.ts
 
-// for single
+// for_single
 deno run -A bench.ts framework_name
 ```
 ## For other frameworks ? please create PRs.
-### Create server `./frameworks/myserver/server.ts`.
-### Create info `./frameworks/myserver/info.json`.
+### Create server
+Create server `./frameworks/myserver/server.ts`.
+```ts
+...
+framework.get("/", (req, res) => {
+  res.json({ name: "bench" });
+});
+...
+```
+### Create info
+Create info `./frameworks/myserver/info.json`.
 ```json
-// example info.json
 {
   "name": "deno_std",
   "run": "deno run -A ./frameworks/deno_std/server.ts",

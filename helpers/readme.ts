@@ -23,6 +23,7 @@ await Deno.writeTextFile(
     `
 ## Output
 Created At : ${now.toDateString() + ", " + now.toLocaleTimeString()}
+
 Created By : [bot_ci](https://github.com/herudi/deno_benchmarks/commits?author=github-actions%5Bbot%5D)
 
 ${table}`,
