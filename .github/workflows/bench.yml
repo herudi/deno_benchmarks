@@ -25,8 +25,8 @@ jobs:
         run: deno run -A bench.ts deno_std
       - name: End Bench
         run: |
-          RESULT_PATH="results/deno_std.json"
-          RESULT="$(cat results/deno_std.json)"
+          RESULT_PATH="frameworks/deno_std/result.json"
+          RESULT="$(cat frameworks/deno_std/result.json)"
           echo "::set-output name=result_path::$RESULT_PATH"
           echo "::set-output name=result::$RESULT"
   nhttp:
@@ -49,8 +49,8 @@ jobs:
         run: deno run -A bench.ts nhttp
       - name: End Bench
         run: |
-          RESULT_PATH="results/nhttp.json"
-          RESULT="$(cat results/nhttp.json)"
+          RESULT_PATH="frameworks/nhttp/result.json"
+          RESULT="$(cat frameworks/nhttp/result.json)"
           echo "::set-output name=result_path::$RESULT_PATH"
           echo "::set-output name=result::$RESULT"
   results:

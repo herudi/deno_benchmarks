@@ -43,8 +43,8 @@ while (i < len) {
         {
             name: 'End Bench',
             run:
-                `RESULT_PATH="results/${info.name}.json"
-RESULT="$(cat results/${info.name}.json)"
+                `RESULT_PATH="frameworks/${info.name}/result.json"
+RESULT="$(cat frameworks/${info.name}/result.json)"
 echo "::set-output name=result_path::$RESULT_PATH"
 echo "::set-output name=result::$RESULT"
 `
