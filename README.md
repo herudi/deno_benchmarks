@@ -15,14 +15,15 @@ framework.get("/", (req, res) => {
 ```
 
 ## Output
-Created At : Fri Jan 07 2022, 7:48:05 AM
+Created At : Fri Jan 07 2022, 8:05:57 AM
+
 Created By : [bot_ci](https://github.com/herudi/deno_benchmarks/commits?author=github-actions%5Bbot%5D)
 
 |Name|Req/sec|Trf/sec|Version|Router?|Lang/Runtime|
 |----|----|----|----|----|----|
-|[nhttp](https://github.com/nhttp/nhttp)|20089.6|2.66MB|latest|true|Deno|
-|[deno_std](https://deno.land/std/http)|18725.79|2.48MB|0.119.0|false|Deno|
-|[oak](https://github.com/oakserver/oak)|11349.83|1.50MB|latest|true|Deno|
+|[nhttp](https://github.com/nhttp/nhttp)|18798.57|2.49MB|latest|true|Deno|
+|[deno_std](https://deno.land/std/http)|17534.01|2.32MB|0.119.0|false|Deno|
+|[oak](https://github.com/oakserver/oak)|12192.97|1.62MB|latest|true|Deno|
 
 
 ## Usage
@@ -30,17 +31,25 @@ Created By : [bot_ci](https://github.com/herudi/deno_benchmarks/commits?author=g
 git clone https://github.com/herudi/deno_benchmark.git
 cd deno_benchmark
 
-// for all
+// for_all
 deno run -A bench.ts
 
-// for single
+// for_single
 deno run -A bench.ts framework_name
 ```
 ## For other frameworks ? please create PRs.
-### Create server `./frameworks/myserver/server.ts`.
-### Create info `./frameworks/myserver/info.json`.
+### Create server
+Create server `./frameworks/myserver/server.ts`.
+```ts
+...
+framework.get("/", (req, res) => {
+  res.json({ name: "bench" });
+});
+...
+```
+### Create info
+Create info `./frameworks/myserver/info.json`.
 ```json
-// example info.json
 {
   "name": "deno_std",
   "run": "deno run -A ./frameworks/deno_std/server.ts",
