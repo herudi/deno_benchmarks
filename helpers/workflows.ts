@@ -13,7 +13,7 @@ while (i < len) {
         run: `echo '\${{needs.${info.name}.outputs.result}}' | jq . | tee \${{needs.${info.name}.outputs.result_path}}`
     })
     obj[info.name] = {};
-    obj[info.name]['runs-on'] = 'ubuntu-latest';
+    obj[info.name]['runs-on'] = 'macos-latest';
     obj[info.name]['outputs'] = {
         result_path: '${{ steps.result.outputs.result_path }}',
         result: '${{ steps.result.outputs.result }}'
@@ -24,17 +24,12 @@ while (i < len) {
             uses: 'actions/checkout@master'
         },
         {
-            name: 'Setup Node.js',
-            uses: 'actions/setup-node@v1',
-            with: { 'node-version': '16.x' }
-        },
-        {
             name: 'Setup Deno',
             uses: 'denoland/setup-deno@main'
         },
         {
-            name: 'Install Autocannon',
-            run: 'npm install autocannon -g'
+            name: 'Setup wrk',
+            run: 'brew install wrk'
         },
         {
             name: 'Start Bench',
@@ -54,7 +49,7 @@ echo "::set-output name=result::$RESULT"
     i++;
 }
 const results = {
-    "runs-on": "ubuntu-latest",
+    "runs-on": "macos-latest",
     needs: Object.keys(obj),
     steps: [
         {

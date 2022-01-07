@@ -1,4 +1,5 @@
 import { exec } from "./helpers/deps.ts";
+import parseWrk from "./helpers/parseWrk.js";
 
 const sleep = (sec: number) => new Promise((res) => setTimeout(res, sec * 1000));
 const lookup = "./frameworks/";
@@ -17,19 +18,21 @@ try {
   // update deps 15s
   await sleep(15);
   console.log(`- Warming up ${info.name}. (wait...)`);
-  await exec(`${CMD}autocannon -c 100 -d 10 http://localhost:8000`);
+  await exec(`${CMD}wrk -t2 -c40 -d10s http://localhost:8000`);
   console.log(`- Running ${info.name}. (wait...)`);
-  const out = await exec(`${CMD}autocannon -c 100 -d 10 -j http://localhost:8000`);
-  const result = JSON.parse(out);
+  const out = await exec(`${CMD}wrk -t2 -c40 -d10s http://localhost:8000`);
+  const result = parseWrk(
+    `
+      ${out}
+    `
+  ) as Record<string, any>;
   const myObj = {
     "Frameworks": `[${info.name}](${info.link})`,
-    "Requests/sec": result.requests.average,
-    "Latency": result.latency.average,
-    "Throughput/Mb": (result.throughput.average / 1024 / 1024).toFixed(2),
+    "Requests/sec": result.requestsPerSec,
+    "Transfer/sec": result.transferPerSec,
     "Version": info.version,
     "Router?": info.is_router,
-    "Lang/Runtime": info.lang,
-    "Errors": result.errors,
+    "Lang/Runtime": info.lang
   }
   await Deno.writeTextFile(`./results/${info.name}.json`, JSON.stringify(myObj));
   if (result.errors === 0) {

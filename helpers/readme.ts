@@ -3,12 +3,10 @@ import { mark, recursiveReaddir } from "./deps.ts";
 const headers = [
     "Frameworks",
     "Requests/sec",
-    "Latency",
-    "Throughput/Mb",
+    "Transfer/sec",
     "Version",
     "Router?",
-    "Lang/Runtime",
-    "Errors",
+    "Lang/Runtime"
 ];
 
 const arr = (await recursiveReaddir("results"))

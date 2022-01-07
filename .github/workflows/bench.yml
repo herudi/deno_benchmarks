@@ -6,21 +6,17 @@ name: bench
     branches: master
 jobs:
   deno_std:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     outputs:
       result_path: '${{ steps.result.outputs.result_path }}'
       result: '${{ steps.result.outputs.result }}'
     steps:
       - name: Checkout Repository
         uses: actions/checkout@master
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16.x
       - name: Setup Deno
         uses: denoland/setup-deno@main
-      - name: Install Autocannon
-        run: npm install autocannon -g
+      - name: Setup wrk
+        run: brew install wrk
       - name: Start Bench
         run: deno run -A bench.ts deno_std
       - name: End Bench
@@ -31,21 +27,17 @@ jobs:
           echo "::set-output name=result_path::$RESULT_PATH"
           echo "::set-output name=result::$RESULT"
   nhttp:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     outputs:
       result_path: '${{ steps.result.outputs.result_path }}'
       result: '${{ steps.result.outputs.result }}'
     steps:
       - name: Checkout Repository
         uses: actions/checkout@master
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16.x
       - name: Setup Deno
         uses: denoland/setup-deno@main
-      - name: Install Autocannon
-        run: npm install autocannon -g
+      - name: Setup wrk
+        run: brew install wrk
       - name: Start Bench
         run: deno run -A bench.ts nhttp
       - name: End Bench
@@ -56,7 +48,7 @@ jobs:
           echo "::set-output name=result_path::$RESULT_PATH"
           echo "::set-output name=result::$RESULT"
   results:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     needs:
       - deno_std
       - nhttp
