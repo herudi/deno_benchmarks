@@ -13,7 +13,7 @@ framework.get("/", (req, res) => {
 ```
 
 ## Output
-Created At : Fri Jan 07 2022, 4:20:19 AM
+Created At : Fri Jan 07 2022, 5:48:08 AM
 
 |Frameworks|Requests/sec|Latency|Throughput/Mb|Version|Router?|Lang/Runtime|Errors|
 |----|----|----|----|----|----|----|----|
