@@ -1,7 +1,7 @@
 {
   "Frameworks": "[oak](https://github.com/oakserver/oak)",
-  "Requests/sec": 23686.8,
-  "Latency": 3.76,
+  "Requests/sec": 23655.64,
+  "Latency": 3.71,
   "Throughput/Mb": "3.14",
   "Version": "10.1.0",
   "Router?": true,

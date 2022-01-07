@@ -13,12 +13,12 @@ framework.get("/", (req, res) => {
 ```
 
 ## Output
-Created At : Thu Jan 06 2022, 2:08:29 PM
+Created At : Fri Jan 07 2022, 1:19:48 AM
 
 |Frameworks|Requests/sec|Latency|Throughput/Mb|Version|Router?|Lang/Runtime|Errors|
 |----|----|----|----|----|----|----|----|
-|[nhttp](https://github.com/nhttp/nhttp)|42649.6|2|5.65|1.1.5|true|Deno|0|
-|[oak](https://github.com/oakserver/oak)|23686.8|3.76|3.14|10.1.0|true|Deno|0|
+|[nhttp](https://github.com/nhttp/nhttp)|32904.4|2.46|4.36|1.1.5|true|Deno|0|
+|[oak](https://github.com/oakserver/oak)|23655.64|3.71|3.14|10.1.0|true|Deno|0|
 
 
 ## Usage
