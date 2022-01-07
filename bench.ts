@@ -21,7 +21,7 @@ try {
   console.log(`- Running ${info.name}. (wait...)`);
   const out = await exec(`${CMD}autocannon -c 100 -d 10 -j http://localhost:8000`);
   const result = JSON.parse(out);
-  await Deno.writeTextFile(`./results/${fw}.json`, JSON.stringify({
+  const myObj = {
     "Frameworks": `[${info.name}](${info.link})`,
     "Requests/sec": result.requests.average,
     "Latency": result.latency.average,
@@ -30,12 +30,14 @@ try {
     "Router?": info.is_router,
     "Lang/Runtime": info.lang,
     "Errors": result.errors,
-  }));
+  }
+  await Deno.writeTextFile(`results/${fw}.json`, JSON.stringify(myObj));
   if (result.errors === 0) {
     console.log("Success bench", info.name);
   } else {
     console.error("Failed bench", info.name);
   }
+  console.log(myObj);
   p.kill("SIGTERM");
   p.close();
   await sleep(5);

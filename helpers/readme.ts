@@ -11,8 +11,8 @@ const headers = [
     "Errors",
 ];
 
-const arr = (await recursiveReaddir("frameworks"))
-    .filter((el) => el.endsWith("result.json"))
+const arr = (await recursiveReaddir("results"))
+    .filter((el) => el.endsWith(".json"))
     .map(el => JSON.parse(Deno.readTextFileSync(el)))
     .sort((a, b) => (b['Requests/sec'] < a['Requests/sec'] ? -1 : 1));
 const now = new Date();

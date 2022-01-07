@@ -25,8 +25,8 @@ jobs:
         run: deno run -A bench.ts deno_std
       - name: End Bench
         run: |
-          RESULT_PATH = "results/deno_std.json"
-          RESULT = "$(cat results/deno_std.json)"
+          RESULT_PATH="results/deno_std.json"
+          RESULT="$(cat results/deno_std.json)"
           echo "::set-output name=result_path::$RESULT_PATH"
           echo "::set-output name=result::$RESULT"
   express:
@@ -49,8 +49,8 @@ jobs:
         run: deno run -A bench.ts express
       - name: End Bench
         run: |
-          RESULT_PATH = "results/express.json"
-          RESULT = "$(cat results/express.json)"
+          RESULT_PATH="results/express.json"
+          RESULT="$(cat results/express.json)"
           echo "::set-output name=result_path::$RESULT_PATH"
           echo "::set-output name=result::$RESULT"
   fastify:
@@ -73,8 +73,8 @@ jobs:
         run: deno run -A bench.ts fastify
       - name: End Bench
         run: |
-          RESULT_PATH = "results/fastify.json"
-          RESULT = "$(cat results/fastify.json)"
+          RESULT_PATH="results/fastify.json"
+          RESULT="$(cat results/fastify.json)"
           echo "::set-output name=result_path::$RESULT_PATH"
           echo "::set-output name=result::$RESULT"
   nhttp:
@@ -97,8 +97,8 @@ jobs:
         run: deno run -A bench.ts nhttp
       - name: End Bench
         run: |
-          RESULT_PATH = "results/nhttp.json"
-          RESULT = "$(cat results/nhttp.json)"
+          RESULT_PATH="results/nhttp.json"
+          RESULT="$(cat results/nhttp.json)"
           echo "::set-output name=result_path::$RESULT_PATH"
           echo "::set-output name=result::$RESULT"
   node_bare:
@@ -121,8 +121,8 @@ jobs:
         run: deno run -A bench.ts node_bare
       - name: End Bench
         run: |
-          RESULT_PATH = "results/node_bare.json"
-          RESULT = "$(cat results/node_bare.json)"
+          RESULT_PATH="results/node_bare.json"
+          RESULT="$(cat results/node_bare.json)"
           echo "::set-output name=result_path::$RESULT_PATH"
           echo "::set-output name=result::$RESULT"
   oak:
@@ -145,8 +145,8 @@ jobs:
         run: deno run -A bench.ts oak
       - name: End Bench
         run: |
-          RESULT_PATH = "results/oak.json"
-          RESULT = "$(cat results/oak.json)"
+          RESULT_PATH="results/oak.json"
+          RESULT="$(cat results/oak.json)"
           echo "::set-output name=result_path::$RESULT_PATH"
           echo "::set-output name=result::$RESULT"
   opine:
@@ -169,8 +169,8 @@ jobs:
         run: deno run -A bench.ts opine
       - name: End Bench
         run: |
-          RESULT_PATH = "results/opine.json"
-          RESULT = "$(cat results/opine.json)"
+          RESULT_PATH="results/opine.json"
+          RESULT="$(cat results/opine.json)"
           echo "::set-output name=result_path::$RESULT_PATH"
           echo "::set-output name=result::$RESULT"
   results:
