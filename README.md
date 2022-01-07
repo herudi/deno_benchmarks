@@ -13,10 +13,11 @@ framework.get("/", (req, res) => {
 ```
 
 ## Output
-Created At : Fri Jan 07 2022, 5:48:08 AM
+Created At : Fri Jan 07 2022, 5:55:54 AM
 
 |Frameworks|Requests/sec|Latency|Throughput/Mb|Version|Router?|Lang/Runtime|Errors|
 |----|----|----|----|----|----|----|----|
+|[nhttp](https://github.com/nhttp/nhttp)|32904.4|2.46|4.36|1.1.5|true|Deno|0|
 
 
 ## Usage
