@@ -15,15 +15,15 @@ framework.get("/", (req, res) => {
 ```
 
 ## Output
-Created At : Fri Jan 07 2022, 8:21:34 AM
+Created At : Fri Jan 07 2022, 11:19:27 AM
 
 Created By : [bot_ci](https://github.com/herudi/deno_benchmarks/commits?author=github-actions%5Bbot%5D)
 
 |Name|Req/sec|Trf/sec|Version|Router?|Lang/Runtime|
 |----|----|----|----|----|----|
-|[nhttp](https://github.com/nhttp/nhttp)|17081.25|2.26MB|latest|true|Deno|
-|[deno_std](https://deno.land/std/http)|15734|2.09MB|0.119.0|false|Deno|
-|[oak](https://github.com/oakserver/oak)|10255.94|1.36MB|latest|true|Deno|
+|[nhttp](https://github.com/nhttp/nhttp)|18689.33|2.48MB|latest|true|Deno|
+|[deno_std](https://deno.land/std/http)|18467.06|2.45MB|0.119.0|false|Deno|
+|[oak](https://github.com/oakserver/oak)|9181.33|1.22MB|latest|true|Deno|
 
 
 ## Usage
