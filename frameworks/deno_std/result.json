@@ -1,0 +1,10 @@
+{
+  "Frameworks": "[deno_std](https://deno.land/std/http)",
+  "Requests/sec": 24161.6,
+  "Latency": 3.67,
+  "Throughput/Mb": "3.20",
+  "Version": "0.119.0",
+  "Router?": false,
+  "Lang/Runtime": "Deno",
+  "Errors": 0
+}
