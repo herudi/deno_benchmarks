@@ -42,6 +42,7 @@ while (i < len) {
         },
         {
             name: 'End Bench',
+            id: 'result',
             run:
                 `RESULT_PATH="frameworks/${info.name}/result.json"
 RESULT="$(cat frameworks/${info.name}/result.json)"

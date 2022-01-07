@@ -24,6 +24,7 @@ jobs:
       - name: Start Bench
         run: deno run -A bench.ts deno_std
       - name: End Bench
+        id: result
         run: |
           RESULT_PATH="frameworks/deno_std/result.json"
           RESULT="$(cat frameworks/deno_std/result.json)"
@@ -48,6 +49,7 @@ jobs:
       - name: Start Bench
         run: deno run -A bench.ts nhttp
       - name: End Bench
+        id: result
         run: |
           RESULT_PATH="frameworks/nhttp/result.json"
           RESULT="$(cat frameworks/nhttp/result.json)"
