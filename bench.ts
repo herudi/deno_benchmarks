@@ -67,5 +67,5 @@ if (fw) {
     if (result) results.push(result);
     i++;
   }
-  console.log(results);
+  console.log(results.sort((a, b) => (b['Req/sec'] < a['Req/sec'] ? -1 : 1)));
 }
