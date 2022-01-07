@@ -1,0 +1,8 @@
+{
+  "name": "oak",
+  "run": "deno run -A ./frameworks/oak/server.ts",
+  "lang": "Deno",
+  "link": "https://github.com/oakserver/oak",
+  "version": "latest",
+  "is_router": true
+}

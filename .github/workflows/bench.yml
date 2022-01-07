@@ -19,6 +19,7 @@ jobs:
         run: brew install wrk
       - name: Start Bench
         run: deno run -A bench.ts deno_std
+        continue-on-error: true
       - name: End Bench
         id: result
         run: |
@@ -40,6 +41,7 @@ jobs:
         run: brew install wrk
       - name: Start Bench
         run: deno run -A bench.ts nhttp
+        continue-on-error: true
       - name: End Bench
         id: result
         run: |
@@ -47,11 +49,34 @@ jobs:
           RESULT="$(cat results/nhttp.json)"
           echo "::set-output name=result_path::$RESULT_PATH"
           echo "::set-output name=result::$RESULT"
+  oak:
+    runs-on: macos-latest
+    outputs:
+      result_path: '${{ steps.result.outputs.result_path }}'
+      result: '${{ steps.result.outputs.result }}'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@master
+      - name: Setup Deno
+        uses: denoland/setup-deno@main
+      - name: Setup wrk
+        run: brew install wrk
+      - name: Start Bench
+        run: deno run -A bench.ts oak
+        continue-on-error: true
+      - name: End Bench
+        id: result
+        run: |
+          RESULT_PATH="results/oak.json"
+          RESULT="$(cat results/oak.json)"
+          echo "::set-output name=result_path::$RESULT_PATH"
+          echo "::set-output name=result::$RESULT"
   results:
     runs-on: macos-latest
     needs:
       - deno_std
       - nhttp
+      - oak
     steps:
       - name: Checkout Repository
         uses: actions/checkout@master
@@ -66,6 +91,10 @@ jobs:
         run: >-
           echo '${{needs.nhttp.outputs.result}}' | jq . | tee
           ${{needs.nhttp.outputs.result_path}}
+      - name: Result oak
+        run: >-
+          echo '${{needs.oak.outputs.result}}' | jq . | tee
+          ${{needs.oak.outputs.result_path}}
       - name: Setup deno
         uses: denoland/setup-deno@main
       - name: Setup readme
