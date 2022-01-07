@@ -1,13 +1,13 @@
 name: bench
-on:
+'on':
   schedule:
     - cron: 0 0 * * *
   push:
-    branches: [ master ]
-jobs: 
-  nhttp:
+    branches: master
+jobs:
+  deno_std:
     runs-on: ubuntu-latest
-    outputs: 
+    outputs:
       result_path: '${{ steps.result.outputs.result_path }}'
       result: '${{ steps.result.outputs.result }}'
     steps:
@@ -16,23 +16,94 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: '16.x'
-      - name: Setup deno latest
+          node-version: 16.x
+      - name: Setup Deno
+        uses: denoland/setup-deno@main
+      - name: Install Autocannon
+        run: npm install autocannon -g
+      - name: Start Bench
+        run: deno run -A bench.ts deno_std
+      - name: End Bench
+        run: |
+          RESULT_PATH = "results/deno_std.json"
+          RESULT = "$(cat results/deno_std.json)"
+          echo "::set-output name=result_path::$RESULT_PATH"
+          echo "::set-output name=result::$RESULT"
+  express:
+    runs-on: ubuntu-latest
+    outputs:
+      result_path: '${{ steps.result.outputs.result_path }}'
+      result: '${{ steps.result.outputs.result }}'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@master
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+      - name: Setup Deno
+        uses: denoland/setup-deno@main
+      - name: Install Autocannon
+        run: npm install autocannon -g
+      - name: Start Bench
+        run: deno run -A bench.ts express
+      - name: End Bench
+        run: |
+          RESULT_PATH = "results/express.json"
+          RESULT = "$(cat results/express.json)"
+          echo "::set-output name=result_path::$RESULT_PATH"
+          echo "::set-output name=result::$RESULT"
+  fastify:
+    runs-on: ubuntu-latest
+    outputs:
+      result_path: '${{ steps.result.outputs.result_path }}'
+      result: '${{ steps.result.outputs.result }}'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@master
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+      - name: Setup Deno
+        uses: denoland/setup-deno@main
+      - name: Install Autocannon
+        run: npm install autocannon -g
+      - name: Start Bench
+        run: deno run -A bench.ts fastify
+      - name: End Bench
+        run: |
+          RESULT_PATH = "results/fastify.json"
+          RESULT = "$(cat results/fastify.json)"
+          echo "::set-output name=result_path::$RESULT_PATH"
+          echo "::set-output name=result::$RESULT"
+  nhttp:
+    runs-on: ubuntu-latest
+    outputs:
+      result_path: '${{ steps.result.outputs.result_path }}'
+      result: '${{ steps.result.outputs.result }}'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@master
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+      - name: Setup Deno
         uses: denoland/setup-deno@main
       - name: Install Autocannon
         run: npm install autocannon -g
       - name: Start Bench
         run: deno run -A bench.ts nhttp
       - name: End Bench
-        id: result
-        run: | 
-          RESULT_PATH="frameworks/nhttp/result.json"
-          RESULT="$(cat frameworks/nhttp/result.json)"
+        run: |
+          RESULT_PATH = "results/nhttp.json"
+          RESULT = "$(cat results/nhttp.json)"
           echo "::set-output name=result_path::$RESULT_PATH"
           echo "::set-output name=result::$RESULT"
-  oak:
+  node_bare:
     runs-on: ubuntu-latest
-    outputs: 
+    outputs:
       result_path: '${{ steps.result.outputs.result_path }}'
       result: '${{ steps.result.outputs.result }}'
     steps:
@@ -41,48 +112,119 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: '16.x'
-      - name: Setup deno latest
+          node-version: 16.x
+      - name: Setup Deno
+        uses: denoland/setup-deno@main
+      - name: Install Autocannon
+        run: npm install autocannon -g
+      - name: Start Bench
+        run: deno run -A bench.ts node_bare
+      - name: End Bench
+        run: |
+          RESULT_PATH = "results/node_bare.json"
+          RESULT = "$(cat results/node_bare.json)"
+          echo "::set-output name=result_path::$RESULT_PATH"
+          echo "::set-output name=result::$RESULT"
+  oak:
+    runs-on: ubuntu-latest
+    outputs:
+      result_path: '${{ steps.result.outputs.result_path }}'
+      result: '${{ steps.result.outputs.result }}'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@master
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+      - name: Setup Deno
         uses: denoland/setup-deno@main
       - name: Install Autocannon
         run: npm install autocannon -g
       - name: Start Bench
         run: deno run -A bench.ts oak
       - name: End Bench
-        id: result
-        run: | 
-          RESULT_PATH="frameworks/oak/result.json"
-          RESULT="$(cat frameworks/oak/result.json)"
+        run: |
+          RESULT_PATH = "results/oak.json"
+          RESULT = "$(cat results/oak.json)"
           echo "::set-output name=result_path::$RESULT_PATH"
           echo "::set-output name=result::$RESULT"
-  results: 
+  opine:
+    runs-on: ubuntu-latest
+    outputs:
+      result_path: '${{ steps.result.outputs.result_path }}'
+      result: '${{ steps.result.outputs.result }}'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@master
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+      - name: Setup Deno
+        uses: denoland/setup-deno@main
+      - name: Install Autocannon
+        run: npm install autocannon -g
+      - name: Start Bench
+        run: deno run -A bench.ts opine
+      - name: End Bench
+        run: |
+          RESULT_PATH = "results/opine.json"
+          RESULT = "$(cat results/opine.json)"
+          echo "::set-output name=result_path::$RESULT_PATH"
+          echo "::set-output name=result::$RESULT"
+  results:
     runs-on: ubuntu-latest
     needs:
+      - deno_std
+      - express
+      - fastify
       - nhttp
+      - node_bare
       - oak
+      - opine
     steps:
       - name: Checkout Repository
         uses: actions/checkout@master
         with:
           persist-credentials: false
           fetch-depth: 0
+      - name: Result deno_std
+        run: |
+          echo '${{needs.deno_std.outputs.result}}' | jq . | tee
+          ${{needs.deno_std.outputs.result_path}}
+      - name: Result express
+        run: |
+          echo '${{needs.express.outputs.result}}' | jq . | tee
+          ${{needs.express.outputs.result_path}}
+      - name: Result fastify
+        run: |
+          echo '${{needs.fastify.outputs.result}}' | jq . | tee
+          ${{needs.fastify.outputs.result_path}}
       - name: Result nhttp
-        run: > 
+        run: |
           echo '${{needs.nhttp.outputs.result}}' | jq . | tee
           ${{needs.nhttp.outputs.result_path}}
+      - name: Result node_bare
+        run: |
+          echo '${{needs.node_bare.outputs.result}}' | jq . | tee
+          ${{needs.node_bare.outputs.result_path}}
       - name: Result oak
-        run: > 
+        run: |
           echo '${{needs.oak.outputs.result}}' | jq . | tee
           ${{needs.oak.outputs.result_path}}
-      - name: Setup deno latest
+      - name: Result opine
+        run: |
+          echo '${{needs.opine.outputs.result}}' | jq . | tee
+          ${{needs.opine.outputs.result_path}}
+      - name: Setup deno
         uses: denoland/setup-deno@main
-      - name: Readme
+      - name: Setup readme
         run: deno run -A ./helpers/readme.ts
-      - name: Commit
+      - name: Commit and push
         uses: actions-js/push@master
         with:
           github_token: '${{ secrets.GITHUB_TOKEN }}'
           coauthor_email: bot@example.com
           coauthor_name: bot_ci
           branch: master
-      

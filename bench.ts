@@ -21,7 +21,7 @@ try {
   console.log(`- Running ${info.name}. (wait...)`);
   const out = await exec(`${CMD}autocannon -c 100 -d 10 -j http://localhost:8000`);
   const result = JSON.parse(out);
-  await Deno.writeTextFile(lookup + fw + '/result.json', JSON.stringify({
+  await Deno.writeTextFile(`./results/${fw}.json`, JSON.stringify({
     "Frameworks": `[${info.name}](${info.link})`,
     "Requests/sec": result.requests.average,
     "Latency": result.latency.average,
