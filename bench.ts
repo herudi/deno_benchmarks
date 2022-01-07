@@ -34,11 +34,7 @@ async function bench(info: Record<string, any>) {
     if (fw) {
       await Deno.writeTextFile(`./results/${info.name}.json`, JSON.stringify(myObj));
     }
-    if (result.errors === 0) {
-      console.log("Success bench", info.name);
-    } else {
-      console.error("Failed bench", info.name);
-    }
+    console.log("Success bench", info.name);
     p.kill("SIGTERM");
     p.close();
     await sleep(5);
