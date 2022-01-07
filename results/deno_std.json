@@ -1,7 +1,7 @@
 {
-  "Frameworks": "[deno_std](https://deno.land/std/http)",
-  "Requests/sec": 20119.27,
-  "Transfer/sec": "2.67MB",
+  "Name": "[deno_std](https://deno.land/std/http)",
+  "Req/sec": 18725.79,
+  "Trf/sec": "2.48MB",
   "Version": "0.119.0",
   "Router?": false,
   "Lang/Runtime": "Deno"
