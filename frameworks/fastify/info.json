@@ -1,8 +1,0 @@
-{
-  "name": "fastify",
-  "run": "node ./frameworks/fastify/server.js",
-  "lang": "Node",
-  "link": "https://github.com/fastify/fastify",
-  "version": "^3.25.3",
-  "is_router": true
-}

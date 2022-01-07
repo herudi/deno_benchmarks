@@ -29,54 +29,6 @@ jobs:
           RESULT="$(cat results/deno_std.json)"
           echo "::set-output name=result_path::$RESULT_PATH"
           echo "::set-output name=result::$RESULT"
-  express:
-    runs-on: ubuntu-latest
-    outputs:
-      result_path: '${{ steps.result.outputs.result_path }}'
-      result: '${{ steps.result.outputs.result }}'
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@master
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16.x
-      - name: Setup Deno
-        uses: denoland/setup-deno@main
-      - name: Install Autocannon
-        run: npm install autocannon -g
-      - name: Start Bench
-        run: deno run -A bench.ts express
-      - name: End Bench
-        run: |
-          RESULT_PATH="results/express.json"
-          RESULT="$(cat results/express.json)"
-          echo "::set-output name=result_path::$RESULT_PATH"
-          echo "::set-output name=result::$RESULT"
-  fastify:
-    runs-on: ubuntu-latest
-    outputs:
-      result_path: '${{ steps.result.outputs.result_path }}'
-      result: '${{ steps.result.outputs.result }}'
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@master
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16.x
-      - name: Setup Deno
-        uses: denoland/setup-deno@main
-      - name: Install Autocannon
-        run: npm install autocannon -g
-      - name: Start Bench
-        run: deno run -A bench.ts fastify
-      - name: End Bench
-        run: |
-          RESULT_PATH="results/fastify.json"
-          RESULT="$(cat results/fastify.json)"
-          echo "::set-output name=result_path::$RESULT_PATH"
-          echo "::set-output name=result::$RESULT"
   nhttp:
     runs-on: ubuntu-latest
     outputs:
@@ -101,88 +53,11 @@ jobs:
           RESULT="$(cat results/nhttp.json)"
           echo "::set-output name=result_path::$RESULT_PATH"
           echo "::set-output name=result::$RESULT"
-  node_bare:
-    runs-on: ubuntu-latest
-    outputs:
-      result_path: '${{ steps.result.outputs.result_path }}'
-      result: '${{ steps.result.outputs.result }}'
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@master
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16.x
-      - name: Setup Deno
-        uses: denoland/setup-deno@main
-      - name: Install Autocannon
-        run: npm install autocannon -g
-      - name: Start Bench
-        run: deno run -A bench.ts node_bare
-      - name: End Bench
-        run: |
-          RESULT_PATH="results/node_bare.json"
-          RESULT="$(cat results/node_bare.json)"
-          echo "::set-output name=result_path::$RESULT_PATH"
-          echo "::set-output name=result::$RESULT"
-  oak:
-    runs-on: ubuntu-latest
-    outputs:
-      result_path: '${{ steps.result.outputs.result_path }}'
-      result: '${{ steps.result.outputs.result }}'
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@master
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16.x
-      - name: Setup Deno
-        uses: denoland/setup-deno@main
-      - name: Install Autocannon
-        run: npm install autocannon -g
-      - name: Start Bench
-        run: deno run -A bench.ts oak
-      - name: End Bench
-        run: |
-          RESULT_PATH="results/oak.json"
-          RESULT="$(cat results/oak.json)"
-          echo "::set-output name=result_path::$RESULT_PATH"
-          echo "::set-output name=result::$RESULT"
-  opine:
-    runs-on: ubuntu-latest
-    outputs:
-      result_path: '${{ steps.result.outputs.result_path }}'
-      result: '${{ steps.result.outputs.result }}'
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@master
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16.x
-      - name: Setup Deno
-        uses: denoland/setup-deno@main
-      - name: Install Autocannon
-        run: npm install autocannon -g
-      - name: Start Bench
-        run: deno run -A bench.ts opine
-      - name: End Bench
-        run: |
-          RESULT_PATH="results/opine.json"
-          RESULT="$(cat results/opine.json)"
-          echo "::set-output name=result_path::$RESULT_PATH"
-          echo "::set-output name=result::$RESULT"
   results:
     runs-on: ubuntu-latest
     needs:
       - deno_std
-      - express
-      - fastify
       - nhttp
-      - node_bare
-      - oak
-      - opine
     steps:
       - name: Checkout Repository
         uses: actions/checkout@master
@@ -190,33 +65,13 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
       - name: Result deno_std
-        run: |
+        run: >-
           echo '${{needs.deno_std.outputs.result}}' | jq . | tee
           ${{needs.deno_std.outputs.result_path}}
-      - name: Result express
-        run: |
-          echo '${{needs.express.outputs.result}}' | jq . | tee
-          ${{needs.express.outputs.result_path}}
-      - name: Result fastify
-        run: |
-          echo '${{needs.fastify.outputs.result}}' | jq . | tee
-          ${{needs.fastify.outputs.result_path}}
       - name: Result nhttp
-        run: |
+        run: >-
           echo '${{needs.nhttp.outputs.result}}' | jq . | tee
           ${{needs.nhttp.outputs.result_path}}
-      - name: Result node_bare
-        run: |
-          echo '${{needs.node_bare.outputs.result}}' | jq . | tee
-          ${{needs.node_bare.outputs.result_path}}
-      - name: Result oak
-        run: |
-          echo '${{needs.oak.outputs.result}}' | jq . | tee
-          ${{needs.oak.outputs.result_path}}
-      - name: Result opine
-        run: |
-          echo '${{needs.opine.outputs.result}}' | jq . | tee
-          ${{needs.opine.outputs.result_path}}
       - name: Setup deno
         uses: denoland/setup-deno@main
       - name: Setup readme

@@ -1,8 +1,0 @@
-{
-  "name": "express",
-  "run": "node ./frameworks/express/server.js",
-  "lang": "Node",
-  "link": "https://github.com/expressjs/express",
-  "version": "^4.17.2",
-  "is_router": true
-}

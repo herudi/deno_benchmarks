@@ -10,9 +10,7 @@ while (i < len) {
     const info = infos[i];
     stepsResults.push({
         name: 'Result ' + info.name,
-        run: `echo '\${{needs.${info.name}.outputs.result}}' | jq . | tee
-\${{needs.${info.name}.outputs.result_path}}
-`
+        run: `echo '\${{needs.${info.name}.outputs.result}}' | jq . | tee \${{needs.${info.name}.outputs.result_path}}`
     })
     obj[info.name] = {};
     obj[info.name]['runs-on'] = 'ubuntu-latest';
