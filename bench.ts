@@ -31,7 +31,7 @@ try {
     "Lang/Runtime": info.lang,
     "Errors": result.errors,
   }
-  await Deno.writeTextFile(lookup + fw + '/result.json', JSON.stringify(myObj));
+  await Deno.writeTextFile(`./results/${info.name}.json`, JSON.stringify(myObj));
   if (result.errors === 0) {
     console.log("Success bench", info.name);
   } else {

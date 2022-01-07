@@ -26,8 +26,8 @@ jobs:
       - name: End Bench
         id: result
         run: |
-          RESULT_PATH="frameworks/deno_std/result.json"
-          RESULT="$(cat frameworks/deno_std/result.json)"
+          RESULT_PATH="results/deno_std.json"
+          RESULT="$(cat results/deno_std.json)"
           echo "::set-output name=result_path::$RESULT_PATH"
           echo "::set-output name=result::$RESULT"
   nhttp:
@@ -51,8 +51,8 @@ jobs:
       - name: End Bench
         id: result
         run: |
-          RESULT_PATH="frameworks/nhttp/result.json"
-          RESULT="$(cat frameworks/nhttp/result.json)"
+          RESULT_PATH="results/nhttp.json"
+          RESULT="$(cat results/nhttp.json)"
           echo "::set-output name=result_path::$RESULT_PATH"
           echo "::set-output name=result::$RESULT"
   results:
