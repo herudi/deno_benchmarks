@@ -1,5 +1,4 @@
-import { recursiveReaddir } from "https://deno.land/x/recursive_readdir@v2.0.0/mod.ts";
-import mark from "https://esm.sh/json-to-markdown-table?no-check";
+import { mark, recursiveReaddir } from "./deps.ts";
 
 const headers = [
     "Frameworks",
@@ -18,7 +17,7 @@ const arr = (await recursiveReaddir("frameworks"))
     .sort((a, b) => (b['Requests/sec'] < a['Requests/sec'] ? -1 : 1));
 const now = new Date();
 const table = mark(arr, headers);
-const readme = await Deno.readTextFile('./__README.txt');
+const readme = await Deno.readTextFile('./helpers/__README.txt');
 await Deno.writeTextFile(
     "README.md",
     readme.replace(

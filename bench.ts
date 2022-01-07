@@ -1,6 +1,6 @@
-import { exec } from 'https://deno.land/x/execute@v1.1.0/mod.ts';
+import { exec } from "./helpers/deps.ts";
 
-const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms * 1000));
+const sleep = (sec: number) => new Promise((res) => setTimeout(res, sec * 1000));
 const lookup = "./frameworks/";
 const fw = Deno.args[0];
 const CMD = Deno.build.os === 'windows' ? 'cmd /c ' : '';
@@ -8,13 +8,14 @@ const CMD = Deno.build.os === 'windows' ? 'cmd /c ' : '';
 try {
   const raw = await Deno.readTextFile(lookup + fw + '/info.json');
   const info = JSON.parse(raw);
-  const p = Deno.run({
-    cmd: info.run.split(' ')
-  });
   console.log("------------------------------------------------------------");
   console.log("Start bench", info.name);
   console.log(`- Preparing ${info.name}. (wait...)`);
-  await sleep(5);
+  const p = Deno.run({
+    cmd: info.run.split(' ')
+  });
+  // update deps 15s
+  await sleep(15);
   console.log(`- Warming up ${info.name}. (wait...)`);
   await exec(`${CMD}autocannon -c 100 -d 10 http://localhost:8000`);
   console.log(`- Running ${info.name}. (wait...)`);

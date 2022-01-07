@@ -30,7 +30,6 @@ jobs:
           RESULT="$(cat frameworks/nhttp/result.json)"
           echo "::set-output name=result_path::$RESULT_PATH"
           echo "::set-output name=result::$RESULT"
-
   oak:
     runs-on: ubuntu-latest
     outputs: 
@@ -78,7 +77,7 @@ jobs:
       - name: Setup deno latest
         uses: denoland/setup-deno@main
       - name: Readme
-        run: deno run -A readme.ts
+        run: deno run -A ./helpers/readme.ts
       - name: Commit
         uses: actions-js/push@master
         with:
