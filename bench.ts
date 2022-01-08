@@ -1,10 +1,20 @@
 import { exec, recursiveReaddir } from "./helpers/deps.ts";
 import parseWrk from "./helpers/parseWrk.js";
 
+type TResult = {
+  "Name": string,
+  "Req/sec": number,
+  "Trf/sec": string,
+  "Version": string,
+  "Router?": boolean,
+  "Lang/Runtime": string
+}
+
 const sleep = (sec: number) => new Promise((res) => setTimeout(res, sec * 1000));
 const lookup = "./frameworks/";
 const fw = Deno.args[0];
 const CMD = Deno.build.os === 'windows' ? 'cmd /c ' : '';
+const WRK = 'wrk -t1 -c40 -d10s http://localhost:8000';
 
 async function bench(info: Record<string, any>) {
   try {
@@ -16,23 +26,26 @@ async function bench(info: Record<string, any>) {
     });
     // update deps 20s
     await sleep(20);
+    console.log(`- Warming up ${info.name}. (wait...)`);
+    await exec(`${CMD}${WRK}`);
+    await sleep(3);
     console.log(`- Running ${info.name}. (wait...)`);
-    const out = await exec(`${CMD}wrk -t2 -c40 -d10s http://localhost:8000`);
-    const result = parseWrk(
+    const out = await exec(`${CMD}${WRK}`);
+    const resWrk = parseWrk(
       `
         ${out}
       `
-    ) as Record<string, any>;
-    const myObj = {
+    );
+    const result = {
       "Name": `[${info.name}](${info.link})`,
-      "Req/sec": result.requestsPerSec,
-      "Trf/sec": result.transferPerSec,
+      "Req/sec": resWrk.requestsPerSec,
+      "Trf/sec": resWrk.transferPerSec,
       "Version": info.version,
       "Router?": info.is_router,
       "Lang/Runtime": info.lang
-    }
+    } as TResult;
     if (fw) {
-      await Deno.writeTextFile(`./results/${info.name}.json`, JSON.stringify(myObj));
+      await Deno.writeTextFile(`./results/${info.name}.json`, JSON.stringify(result));
     }
     console.log("Success bench", info.name);
     p.kill("SIGTERM");
@@ -40,10 +53,10 @@ async function bench(info: Record<string, any>) {
     await sleep(5);
     return {
       OriginalName: info.name,
-      ...myObj
+      ...result
     };
   } catch (error) {
-    console.log(error);
+    console.log(info.name, error);
     return null;
   }
 }
@@ -56,12 +69,12 @@ if (fw) {
 } else {
   const arr = (await recursiveReaddir("frameworks"))
     .filter((el) => el.endsWith("info.json"))
-    .map(el => JSON.parse(Deno.readTextFileSync(el))), results = [] as any;
+    .map(el => JSON.parse(Deno.readTextFileSync(el))), results = [] as TResult[];
   let i = 0, len = arr.length;
   while (i < len) {
     const result = await bench(arr[i]);
     if (result) results.push(result);
     i++;
   }
-  console.log(results);
+  console.log(results.sort((a, b) => (b['Req/sec'] < a['Req/sec'] ? -1 : 1)));
 }

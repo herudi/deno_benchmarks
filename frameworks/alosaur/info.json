@@ -1,0 +1,8 @@
+{
+  "name": "alosaur",
+  "run": "deno run -A ./frameworks/alosaur/server.ts",
+  "lang": "Deno",
+  "link": "https://github.com/alosaur/alosaur",
+  "version": "latest",
+  "is_router": true
+}

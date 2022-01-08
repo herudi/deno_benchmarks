@@ -1,0 +1,8 @@
+{
+  "name": "opine",
+  "run": "deno run -A ./frameworks/opine/server.ts",
+  "lang": "Deno",
+  "link": "https://github.com/cmorten/opine",
+  "version": "latest",
+  "is_router": true
+}

@@ -1,0 +1,8 @@
+{
+  "name": "abc",
+  "run": "deno run -A ./frameworks/abc/server.ts",
+  "lang": "Deno",
+  "link": "https://deno.land/x/abc",
+  "version": "latest",
+  "is_router": true
+}

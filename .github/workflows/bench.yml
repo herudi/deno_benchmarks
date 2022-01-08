@@ -5,6 +5,50 @@ name: bench
   push:
     branches: master
 jobs:
+  abc:
+    runs-on: macos-latest
+    outputs:
+      result_path: '${{ steps.result.outputs.result_path }}'
+      result: '${{ steps.result.outputs.result }}'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@master
+      - name: Setup Deno
+        uses: denoland/setup-deno@main
+      - name: Setup wrk
+        run: brew install wrk
+      - name: Start Bench
+        run: deno run -A bench.ts abc
+        continue-on-error: true
+      - name: End Bench
+        id: result
+        run: |
+          RESULT_PATH="results/abc.json"
+          RESULT="$(cat results/abc.json)"
+          echo "::set-output name=result_path::$RESULT_PATH"
+          echo "::set-output name=result::$RESULT"
+  alosaur:
+    runs-on: macos-latest
+    outputs:
+      result_path: '${{ steps.result.outputs.result_path }}'
+      result: '${{ steps.result.outputs.result }}'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@master
+      - name: Setup Deno
+        uses: denoland/setup-deno@main
+      - name: Setup wrk
+        run: brew install wrk
+      - name: Start Bench
+        run: deno run -A bench.ts alosaur
+        continue-on-error: true
+      - name: End Bench
+        id: result
+        run: |
+          RESULT_PATH="results/alosaur.json"
+          RESULT="$(cat results/alosaur.json)"
+          echo "::set-output name=result_path::$RESULT_PATH"
+          echo "::set-output name=result::$RESULT"
   deno_std:
     runs-on: macos-latest
     outputs:
@@ -71,18 +115,51 @@ jobs:
           RESULT="$(cat results/oak.json)"
           echo "::set-output name=result_path::$RESULT_PATH"
           echo "::set-output name=result::$RESULT"
+  opine:
+    runs-on: macos-latest
+    outputs:
+      result_path: '${{ steps.result.outputs.result_path }}'
+      result: '${{ steps.result.outputs.result }}'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@master
+      - name: Setup Deno
+        uses: denoland/setup-deno@main
+      - name: Setup wrk
+        run: brew install wrk
+      - name: Start Bench
+        run: deno run -A bench.ts opine
+        continue-on-error: true
+      - name: End Bench
+        id: result
+        run: |
+          RESULT_PATH="results/opine.json"
+          RESULT="$(cat results/opine.json)"
+          echo "::set-output name=result_path::$RESULT_PATH"
+          echo "::set-output name=result::$RESULT"
   results:
     runs-on: macos-latest
     needs:
+      - abc
+      - alosaur
       - deno_std
       - nhttp
       - oak
+      - opine
     steps:
       - name: Checkout Repository
         uses: actions/checkout@master
         with:
           persist-credentials: false
           fetch-depth: 0
+      - name: Result abc
+        run: >-
+          echo '${{needs.abc.outputs.result}}' | jq . | tee
+          ${{needs.abc.outputs.result_path}}
+      - name: Result alosaur
+        run: >-
+          echo '${{needs.alosaur.outputs.result}}' | jq . | tee
+          ${{needs.alosaur.outputs.result_path}}
       - name: Result deno_std
         run: >-
           echo '${{needs.deno_std.outputs.result}}' | jq . | tee
@@ -95,6 +172,10 @@ jobs:
         run: >-
           echo '${{needs.oak.outputs.result}}' | jq . | tee
           ${{needs.oak.outputs.result_path}}
+      - name: Result opine
+        run: >-
+          echo '${{needs.opine.outputs.result}}' | jq . | tee
+          ${{needs.opine.outputs.result_path}}
       - name: Setup deno
         uses: denoland/setup-deno@main
       - name: Setup readme
