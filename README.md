@@ -1,7 +1,7 @@
 ## Simple deno benchmark.
 This benchmark uses [wrk](https://github.com/wg/wrk).
 
-`wrk -t1 -c40 -d10s http://localhost:8000`. (two rounds. one to warm-up, one to measure)
+`wrk -t2 -c40 -d10s http://localhost:8000`. (two rounds. one to warm-up, one to measure)
 
 > Inspired by [bench](https://github.com/denosaurs/bench).
 
@@ -15,18 +15,18 @@ framework.get("/", (req, res) => {
 ```
 
 ## Output
-Created At : Sat Jan 08 2022, 1:44:57 AM
+Created At : Sat Jan 08 2022, 1:56:57 AM
 
 Created By : [bot_ci](https://github.com/herudi/deno_benchmarks/commits?author=github-actions%5Bbot%5D)
 
 |Name|Req/sec|Trf/sec|Version|Router?|Lang/Runtime|
 |----|----|----|----|----|----|
-|[deno_std](https://deno.land/std/http)|20209.36|2.68MB|0.119.0|false|Deno|
-|[nhttp](https://github.com/nhttp/nhttp)|16541.47|2.19MB|latest|true|Deno|
-|[alosaur](https://github.com/alosaur/alosaur)|15224.03|2.02MB|latest|true|Deno|
-|[oak](https://github.com/oakserver/oak)|11759.59|1.56MB|latest|true|Deno|
-|[opine](https://github.com/cmorten/opine)|9033.8|1.20MB|latest|true|Deno|
-|[abc](https://deno.land/x/abc)|6601.87|657.61KB|latest|true|Deno|
+|[nhttp](https://github.com/nhttp/nhttp)|19943.56|2.64MB|latest|true|Deno|
+|[deno_std](https://deno.land/std/http)|18493.22|2.45MB|0.119.0|false|Deno|
+|[alosaur](https://github.com/alosaur/alosaur)|13051.27|1.73MB|latest|true|Deno|
+|[oak](https://github.com/oakserver/oak)|10062.68|1.33MB|latest|true|Deno|
+|[opine](https://github.com/cmorten/opine)|8757.33|1.16MB|latest|true|Deno|
+|[abc](https://deno.land/x/abc)|6741.63|671.53KB|latest|true|Deno|
 
 
 ## Usage
