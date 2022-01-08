@@ -1,9 +1,36 @@
-import { recursiveReaddir, toYaml } from "./helpers/deps.ts";
+import { recursiveReaddir } from "https://deno.land/x/recursive_readdir@v2.0.0/mod.ts";
+import { stringify as toYaml } from "https://deno.land/std@0.95.0/encoding/yaml.ts";
 
-const infos = (await recursiveReaddir("frameworks"))
+type TInfo = {
+  name: string,
+  run: string,
+  lang: string,
+  link: string,
+  version: string,
+  is_router: boolean
+}
+
+const infos: TInfo[] = (await recursiveReaddir("frameworks"))
   .filter((el) => el.endsWith("info.json"))
   .map(el => JSON.parse(Deno.readTextFileSync(el)));
 let i = 0, len = infos.length, obj = {} as Record<string, any>;
+
+function setupActionLang(name: string) {
+  if (name.toLowerCase() === 'node') {
+    return [
+      {
+        name: 'Setup nodejs',
+        uses: 'actions/setup-node@v1',
+        with: { 'node-version': '16' }
+      },
+      {
+        name: 'Install Deps',
+        run: 'npm ci'
+      }
+    ]
+  }
+  return [];
+}
 
 const stepsResults = [] as Record<string, any>[];
 while (i < len) {
@@ -31,6 +58,7 @@ while (i < len) {
       name: 'Setup wrk',
       run: 'brew install wrk'
     },
+    ...setupActionLang(info.lang as string),
     {
       name: 'Start Bench',
       run: 'deno run -A bench.ts ' + info.name,

@@ -71,6 +71,62 @@ jobs:
           RESULT="$(cat results/deno_std.json)"
           echo "::set-output name=result_path::$RESULT_PATH"
           echo "::set-output name=result::$RESULT"
+  express:
+    runs-on: macos-latest
+    outputs:
+      result_path: '${{ steps.result.outputs.result_path }}'
+      result: '${{ steps.result.outputs.result }}'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@master
+      - name: Setup Deno
+        uses: denoland/setup-deno@main
+      - name: Setup wrk
+        run: brew install wrk
+      - name: Setup nodejs
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16'
+      - name: Install Deps
+        run: npm ci
+      - name: Start Bench
+        run: deno run -A bench.ts express
+        continue-on-error: true
+      - name: End Bench
+        id: result
+        run: |
+          RESULT_PATH="results/express.json"
+          RESULT="$(cat results/express.json)"
+          echo "::set-output name=result_path::$RESULT_PATH"
+          echo "::set-output name=result::$RESULT"
+  fastify:
+    runs-on: macos-latest
+    outputs:
+      result_path: '${{ steps.result.outputs.result_path }}'
+      result: '${{ steps.result.outputs.result }}'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@master
+      - name: Setup Deno
+        uses: denoland/setup-deno@main
+      - name: Setup wrk
+        run: brew install wrk
+      - name: Setup nodejs
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16'
+      - name: Install Deps
+        run: npm ci
+      - name: Start Bench
+        run: deno run -A bench.ts fastify
+        continue-on-error: true
+      - name: End Bench
+        id: result
+        run: |
+          RESULT_PATH="results/fastify.json"
+          RESULT="$(cat results/fastify.json)"
+          echo "::set-output name=result_path::$RESULT_PATH"
+          echo "::set-output name=result::$RESULT"
   nhttp:
     runs-on: macos-latest
     outputs:
@@ -91,6 +147,34 @@ jobs:
         run: |
           RESULT_PATH="results/nhttp.json"
           RESULT="$(cat results/nhttp.json)"
+          echo "::set-output name=result_path::$RESULT_PATH"
+          echo "::set-output name=result::$RESULT"
+  node_bare:
+    runs-on: macos-latest
+    outputs:
+      result_path: '${{ steps.result.outputs.result_path }}'
+      result: '${{ steps.result.outputs.result }}'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@master
+      - name: Setup Deno
+        uses: denoland/setup-deno@main
+      - name: Setup wrk
+        run: brew install wrk
+      - name: Setup nodejs
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16'
+      - name: Install Deps
+        run: npm ci
+      - name: Start Bench
+        run: deno run -A bench.ts node_bare
+        continue-on-error: true
+      - name: End Bench
+        id: result
+        run: |
+          RESULT_PATH="results/node_bare.json"
+          RESULT="$(cat results/node_bare.json)"
           echo "::set-output name=result_path::$RESULT_PATH"
           echo "::set-output name=result::$RESULT"
   oak:
@@ -143,7 +227,10 @@ jobs:
       - abc
       - alosaur
       - deno_std
+      - express
+      - fastify
       - nhttp
+      - node_bare
       - oak
       - opine
     steps:
@@ -164,10 +251,22 @@ jobs:
         run: >-
           echo '${{needs.deno_std.outputs.result}}' | jq . | tee
           ${{needs.deno_std.outputs.result_path}}
+      - name: Result express
+        run: >-
+          echo '${{needs.express.outputs.result}}' | jq . | tee
+          ${{needs.express.outputs.result_path}}
+      - name: Result fastify
+        run: >-
+          echo '${{needs.fastify.outputs.result}}' | jq . | tee
+          ${{needs.fastify.outputs.result_path}}
       - name: Result nhttp
         run: >-
           echo '${{needs.nhttp.outputs.result}}' | jq . | tee
           ${{needs.nhttp.outputs.result_path}}
+      - name: Result node_bare
+        run: >-
+          echo '${{needs.node_bare.outputs.result}}' | jq . | tee
+          ${{needs.node_bare.outputs.result_path}}
       - name: Result oak
         run: >-
           echo '${{needs.oak.outputs.result}}' | jq . | tee

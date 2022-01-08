@@ -1,4 +1,5 @@
-import { exec, recursiveReaddir } from "./helpers/deps.ts";
+import { exec } from 'https://deno.land/x/execute@v1.1.0/mod.ts';
+import { recursiveReaddir } from "https://deno.land/x/recursive_readdir@v2.0.0/mod.ts";
 import parseWrk from "./helpers/parseWrk.js";
 
 type TResult = {

@@ -1,4 +1,5 @@
-import { mark, recursiveReaddir } from "./deps.ts";
+import mark from "https://esm.sh/json-to-markdown-table?no-check";
+import { recursiveReaddir } from "https://deno.land/x/recursive_readdir@v2.0.0/mod.ts";
 
 const headers = [
   "Name",

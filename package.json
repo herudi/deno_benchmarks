@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "express": "^4.17.2",
+    "fastify": "^3.25.3"
+  }
+}
