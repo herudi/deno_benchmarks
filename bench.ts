@@ -15,7 +15,7 @@ const sleep = (sec: number) => new Promise((res) => setTimeout(res, sec * 1000))
 const lookup = "./frameworks/";
 const fw = Deno.args[0];
 const CMD = Deno.build.os === 'windows' ? 'cmd /c ' : '';
-const WRK = 'wrk -t2 -c40 -d10s http://localhost:8000';
+const WRK = 'wrk -t8 -c100 -d30s http://localhost:8000';
 
 async function bench(info: Record<string, any>) {
   try {
