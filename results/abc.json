@@ -1,7 +1,7 @@
 {
   "Name": "[abc](https://deno.land/x/abc)",
-  "Req/sec": 6667.91,
-  "Trf/sec": "664.19KB",
+  "Req/sec": 4953.44,
+  "Trf/sec": "493.41KB",
   "Version": "latest",
   "Router?": true,
   "Lang/Runtime": "Deno"
