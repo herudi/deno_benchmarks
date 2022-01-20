@@ -1,7 +1,7 @@
 {
   "Name": "[nhttp](https://github.com/nhttp/nhttp)",
-  "Req/sec": 16464.45,
-  "Trf/sec": "2.18MB",
+  "Req/sec": 17116.81,
+  "Trf/sec": "2.27MB",
   "Version": "latest",
   "Router?": true,
   "Lang/Runtime": "Deno"
