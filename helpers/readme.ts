@@ -12,7 +12,15 @@ const headers = [
 
 const arr = (await recursiveReaddir("results"))
   .filter((el) => el.endsWith(".json"))
-  .map(el => JSON.parse(Deno.readTextFileSync(el)))
+  .map(el => {
+    try {
+      const json = JSON.parse(Deno.readTextFileSync(el));
+      return json;
+    } catch (error) {
+      return { "Name": null };
+    }
+  })
+  .filter((el) => el.Name !== null)
   .sort((a, b) => (b['Req/sec'] < a['Req/sec'] ? -1 : 1));
 const now = new Date();
 const table = mark(arr, headers);
