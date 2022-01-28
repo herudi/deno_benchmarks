@@ -1,7 +1,7 @@
 {
   "Name": "[deno_std](https://deno.land/std/http)",
-  "Req/sec": 11876.56,
-  "Trf/sec": "1.57MB",
+  "Req/sec": 18303.85,
+  "Trf/sec": "2.43MB",
   "Version": "0.119.0",
   "Router?": false,
   "Lang/Runtime": "Deno"
