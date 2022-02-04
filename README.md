@@ -1,5 +1,4 @@
 ## Simple deno benchmark.
-
 This benchmark uses [wrk](https://github.com/wg/wrk).
 
 `wrk -t2 -c40 -d10s http://localhost:8000`. (two rounds. one to warm-up, one to measure)
@@ -16,21 +15,21 @@ framework.get("/", (req, res) => {
 ```
 
 ## Output
-Created At : Fri Feb 04 2022, 1:12:34 AM
+Created At : Fri Feb 04 2022, 8:58:37 AM
 
 Created By : [bot_ci](https://github.com/herudi/deno_benchmarks/commits?author=github-actions%5Bbot%5D)
 
 |Name|Req/sec|Trf/sec|Version|Router?|Lang/Runtime|
 |----|----|----|----|----|----|
-|[deno_std](https://deno.land/std/http)|18757.63|2.49MB|0.119.0|false|Deno|
-|[oak](https://github.com/oakserver/oak)|12148.1|1.61MB|latest|true|Deno|
-|[alosaur](https://github.com/alosaur/alosaur)|11574.76|1.53MB|latest|true|Deno|
-|[fastify](https://github.com/fastify/fastify)|11218.55|1.99MB|^3.25.3|true|Node|
-|[nhttp](https://github.com/nhttp/nhttp)|11079.16|1.47MB|latest|true|Deno|
-|[opine](https://github.com/cmorten/opine)|8031.39|1.06MB|latest|true|Deno|
-|[abc](https://deno.land/x/abc)|6653.84|662.79KB|latest|true|Deno|
-|[node_bare](https://nodejs.org)|6199.78|1.10MB|16.x|false|Node|
-|[express](https://github.com/expressjs/express)|4472.7|812.42KB|^4.17.2|true|Node|
+|[deno_std](https://deno.land/std/http)|19396.57|2.57MB|0.119.0|false|Deno|
+|[nhttp](https://github.com/nhttp/nhttp)|15978.05|2.12MB|latest|true|Deno|
+|[alosaur](https://github.com/alosaur/alosaur)|12563.11|1.67MB|latest|true|Deno|
+|[fastify](https://github.com/fastify/fastify)|12051.55|2.14MB|^3.25.3|true|Node|
+|[node_bare](https://nodejs.org)|10832.17|1.92MB|16.x|false|Node|
+|[oak](https://github.com/oakserver/oak)|8890.98|1.18MB|latest|true|Deno|
+|[opine](https://github.com/cmorten/opine)|8706.35|1.15MB|latest|true|Deno|
+|[abc](https://deno.land/x/abc)|7137.45|710.96KB|latest|true|Deno|
+|[express](https://github.com/expressjs/express)|4763.89|865.32KB|^4.17.2|true|Node|
 
 
 ## Usage
