@@ -1,4 +1,5 @@
 ## Simple deno benchmark.
+
 This benchmark uses [wrk](https://github.com/wg/wrk).
 
 `wrk -t2 -c40 -d10s http://localhost:8000`. (two rounds. one to warm-up, one to measure)
