@@ -1,7 +1,7 @@
 {
   "Name": "[opine](https://github.com/cmorten/opine)",
-  "Req/sec": 7454.63,
-  "Trf/sec": "0.99MB",
+  "Req/sec": 8240.8,
+  "Trf/sec": "1.09MB",
   "Version": "latest",
   "Router?": true,
   "Lang/Runtime": "Deno"
