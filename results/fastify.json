@@ -1,7 +1,7 @@
 {
   "Name": "[fastify](https://github.com/fastify/fastify)",
-  "Req/sec": 10314.61,
-  "Trf/sec": "1.83MB",
+  "Req/sec": 9136.79,
+  "Trf/sec": "1.62MB",
   "Version": "^3.25.3",
   "Router?": true,
   "Lang/Runtime": "Node"
