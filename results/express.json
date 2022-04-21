@@ -1,7 +1,7 @@
 {
   "Name": "[express](https://github.com/expressjs/express)",
-  "Req/sec": 4545.26,
-  "Trf/sec": "825.60KB",
+  "Req/sec": 4358.17,
+  "Trf/sec": "791.62KB",
   "Version": "^4.17.2",
   "Router?": true,
   "Lang/Runtime": "Node"
