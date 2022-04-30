@@ -1,7 +1,7 @@
 {
   "Name": "[oak](https://github.com/oakserver/oak)",
-  "Req/sec": 8685.1,
-  "Trf/sec": "1.34MB",
+  "Req/sec": 11205.9,
+  "Trf/sec": "1.73MB",
   "Version": "latest",
   "Router?": true,
   "Lang/Runtime": "Deno"
