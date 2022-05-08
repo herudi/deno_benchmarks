@@ -1,0 +1,8 @@
+{
+  "Name": "[alosaur](https://github.com/alosaur/alosaur)",
+  "Req/sec": 14802.53,
+  "Trf/sec": "2.29MB",
+  "Version": "latest",
+  "Router?": true,
+  "Lang/Runtime": "Deno"
+}
