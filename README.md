@@ -15,21 +15,21 @@ framework.get("/", (req, res) => {
 ```
 
 ## Output
-Created At : Fri May 13 2022, 2:12:56 AM
+Created At : Sat May 14 2022, 2:14:08 AM
 
 Created By : [bot_ci](https://github.com/herudi/deno_benchmarks/commits?author=github-actions%5Bbot%5D)
 
 |Name|Req/sec|Trf/sec|Version|Router?|Lang/Runtime|
 |----|----|----|----|----|----|
-|[nhttp](https://github.com/nhttp/nhttp)|20511.77|3.17MB|latest|true|Deno|
-|[deno_std](https://deno.land/std/http)|19776.23|3.06MB|0.119.0|false|Deno|
-|[fastify](https://github.com/fastify/fastify)|13538.61|2.40MB|^3.25.3|true|Node|
-|[alosaur](https://github.com/alosaur/alosaur)|13428.53|2.07MB|latest|true|Deno|
-|[oak](https://github.com/oakserver/oak)|11862.07|1.83MB|latest|true|Deno|
-|[node_bare](https://nodejs.org)|9061.87|1.61MB|16.x|false|Node|
-|[opine](https://github.com/cmorten/opine)|8041.97|1.24MB|latest|true|Deno|
-|[abc](https://deno.land/x/abc)|7655.46|762.56KB|latest|true|Deno|
-|[express](https://github.com/expressjs/express)|4580.29|831.97KB|^4.17.2|true|Node|
+|[deno_std](https://deno.land/std/http)|19615.26|3.03MB|0.119.0|false|Deno|
+|[nhttp](https://github.com/nhttp/nhttp)|17454.88|2.70MB|latest|true|Deno|
+|[oak](https://github.com/oakserver/oak)|11949.85|1.85MB|latest|true|Deno|
+|[node_bare](https://nodejs.org)|10819.21|1.92MB|16.x|false|Node|
+|[alosaur](https://github.com/alosaur/alosaur)|10278.02|1.59MB|latest|true|Deno|
+|[fastify](https://github.com/fastify/fastify)|10061.86|1.78MB|^3.25.3|true|Node|
+|[opine](https://github.com/cmorten/opine)|9299.31|1.44MB|latest|true|Deno|
+|[abc](https://deno.land/x/abc)|6477.62|645.23KB|latest|true|Deno|
+|[express](https://github.com/expressjs/express)|4030.42|732.09KB|^4.17.2|true|Node|
 
 
 ## Usage
