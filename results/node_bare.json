@@ -1,7 +1,7 @@
 {
   "Name": "[node_bare](https://nodejs.org)",
-  "Req/sec": 8644.65,
-  "Trf/sec": "1.53MB",
+  "Req/sec": 7726.07,
+  "Trf/sec": "1.37MB",
   "Version": "16.x",
   "Router?": false,
   "Lang/Runtime": "Node"
